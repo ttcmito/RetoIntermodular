@@ -1,6 +1,6 @@
 package clases;
 
-public class Guerrero extends Personaje {
+public class Guerrero extends Personaje implements Jugable {
 	static final int FUERZA = 15;
 	static final int DEFENSA = 10;
 	static final int POCIONES = 2;
@@ -12,6 +12,7 @@ public class Guerrero extends Personaje {
 		pociones = POCIONES;
 	}
 	
+	//metodo implementado por interfaz Jugable
 	@Override
 	public void curar () {
 		if (pociones > 0) {

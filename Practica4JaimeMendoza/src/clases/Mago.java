@@ -1,6 +1,6 @@
 package clases;
 
-public class Mago extends Personaje {
+public class Mago extends Personaje implements Jugable {
 	static final int FUERZA_MAGIA = 20;
 	static final int FUERZA_SIN_MAGIA = 5;
 	static final int DEFENSA = 5;
@@ -13,6 +13,7 @@ public class Mago extends Personaje {
 		magia = MAGIA;
 	}
 	
+	//metodo implementado por interfaz Jugable
 	@Override
 	public void curar () {
 		if (magia > 0) {

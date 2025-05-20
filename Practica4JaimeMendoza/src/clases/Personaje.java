@@ -1,6 +1,6 @@
 package clases;
 
-public class Personaje {
+public abstract class Personaje {
 	private int vida;
 	private int vidaInicial;
 	private int ataque;
@@ -25,9 +25,6 @@ public class Personaje {
 		System.out.println("Le han quitado a " + otro.getNombre() + " " + dmg + " de vida ");
 	}
 
-	public void curar () {
-		
-	}
 	
 	public void resetear () {
 		vida = vidaInicial;
