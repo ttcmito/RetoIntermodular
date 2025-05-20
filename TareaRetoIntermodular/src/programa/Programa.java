@@ -1,5 +1,9 @@
 package programa;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import clases.*;
@@ -11,6 +15,9 @@ public class Programa {
 		Juego nuevoJuego = new Juego ();
 		String seguir = "";
 		int eleccion = 0;
+		int puntuacion = 0;
+		File archivo = new File("MejorPuntuacion.txt");
+		FileWriter fw;
 		
 		System.out.println("¡Bienvenido!");
 		
@@ -25,6 +32,20 @@ public class Programa {
 		String nombre = entrada.nextLine();
 		
 		do {
+			
+			if (archivo.exists()) {
+				try {
+					Scanner lector = new Scanner(archivo);
+					System.out.println("---Mejor puntuacion---");
+					while (lector.hasNext()) {
+						System.out.println(lector.next());
+					}
+					lector.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
 		System.out.print("¿Qué tipo sera tu personaje? \n"
 				+ "1.Mago \n"
@@ -63,6 +84,7 @@ public class Programa {
 					System.out.println(enemigoMago.getNombre() + " ataca ");
 					enemigoMago.atacar(jugadorMago);
 					System.out.println("=======================================");
+					puntuacion += 2;
 					
 					if (nuevoJuego.terminarRonda()) {
 						System.out.println("Enemigo derrotado, siguiente ronda...");
@@ -115,6 +137,7 @@ public class Programa {
 					System.out.println(enemigoGuerrero.getNombre() + " ataca ");
 					enemigoGuerrero.atacar(jugadorGuerrero);
 					System.out.println("=======================================");
+					puntuacion += 2;
 					
 					if (nuevoJuego.terminarRonda()) {
 						System.out.println("Enemigo derrotado, siguiente ronda...");
@@ -141,7 +164,22 @@ public class Programa {
 		default:
 			System.out.println("Elige una opcion correcta");
 		}	
-
+		
+		try {
+			int mayorPuntuacion = 0;
+			fw = new FileWriter(archivo);
+			if (mayorPuntuacion < puntuacion) {
+				mayorPuntuacion = puntuacion;
+				System.out.println("¡" + nombre + " ha conseguido una nueva mejor puntuacion!");
+			}
+			fw.write("Jugador: " + nombre + "\n"
+			+ "Puntuacion: " + mayorPuntuacion + "\n"
+			+ "Rondas jugadas: " + nuevoJuego.getRonda());
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		System.out.print("¿Quieres volver a jugar? (S/N): ");
 		seguir = entrada.nextLine().toUpperCase();
 		

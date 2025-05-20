@@ -1,0 +1,3 @@
+Jugador: jaime
+Puntuacion: 8
+Rondas jugadas: 3
