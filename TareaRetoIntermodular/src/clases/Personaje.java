@@ -24,7 +24,6 @@ public abstract class Personaje {
 		otro.vida -= dmg;
 		System.out.println("Le han quitado a " + otro.getNombre() + " " + dmg + " de vida ");
 	}
-
 	
 	public void resetear () {
 		vida = vidaInicial;
