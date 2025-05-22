@@ -24,6 +24,7 @@ public class Mago extends Personaje implements Jugable {
 			magia --;
 		}
 	}
+
 	
 	@Override 
 	public void atacar (Personaje otro) {
@@ -52,6 +53,12 @@ public class Mago extends Personaje implements Jugable {
 
 	public void setMagia(int magia) {
 		this.magia = magia;
+	}
+
+	@Override
+	public void curar2() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

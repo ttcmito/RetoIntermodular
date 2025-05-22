@@ -38,5 +38,11 @@ public class Guerrero extends Personaje implements Jugable {
 	public void setPociones(int pociones) {
 		this.pociones = pociones;
 	}
+
+	@Override
+	public void curar2() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

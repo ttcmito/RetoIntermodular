@@ -33,6 +33,11 @@ public class Juego {
 		}
 	}
 	
+	//metodo hecho para test de enemigo Aleatorio
+	public static String[] getSiguienteEnemigo () {
+		return nombreEnemigos;
+	}
+	
 	public void getSiguiente () {
 		enemigos.get(0);
 	}

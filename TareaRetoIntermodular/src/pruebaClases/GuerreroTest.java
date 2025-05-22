@@ -6,21 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clases.Guerrero;
-import clases.Mago;
 
-public class PruebaClases {
+public class GuerreroTest {
 	
 	static Guerrero guerrero;
-	static Mago mago;
 	
 	@BeforeEach
 	public void crearGuerrero() {
 		guerrero = new Guerrero("Juan", 100);
-	}
-	
-	@BeforeEach
-	public void crearMago() {
-		mago = new Mago("Jaime", 100);
 	}
 	
 	@Test
@@ -32,23 +25,19 @@ public class PruebaClases {
 	}
 	
 	@Test
-	public void magoAtacaOtro() {
-		Mago otro = new Mago("Otro", 100);
-		int vida = otro.getVida();
-		System.out.println(vida);
-		mago.atacar(otro);
-		System.out.println(otro.getVida());
-		assertEquals(otro.getVida(), vida);
+	public void muereGuerrero() {
+		guerrero.setVida(0);
+		assertEquals(guerrero.muerto(), true);
 	}
 	
 	@Test
-	public void curar() {
-		guerrero.setVida(guerrero.getVidaInicial());
-		assertEquals(guerrero.getVidaInicial(), guerrero.getVida());
+	public void resetearGuerrero() {
+		guerrero.setPociones(2);
 	}
 	
+
 	@Test
-	public void testCurarConPociones() {
+	public void curarGuerrero() {
 	    guerrero.setVidaInicial(100);
 	    guerrero.setVida(50);       
 	    guerrero.setPociones(1);     
@@ -64,17 +53,6 @@ public class PruebaClases {
 		guerrero.setVida(0);
 		assertEquals(guerrero.muerto(), true);
 	}
-	
-	@Test
-	public void resetearGuerrero() {
-		guerrero.setPociones(2);
-	}
-	
-	@Test
-	public void resetearMago() {
-		mago.setMagia(10);
-	}
-	
 	
 	
 }
