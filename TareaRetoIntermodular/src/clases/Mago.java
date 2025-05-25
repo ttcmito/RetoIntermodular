@@ -16,6 +16,7 @@ public class Mago extends Personaje implements Jugable {
 	//metodo implementado por interfaz Jugable
 	@Override
 	public void curar () {
+		//if (magia > 0 && getVida() < getVidaInicial())
 		if (magia > 0) {
 			setVida(getVida() + FUERZA_MAGIA);
 			if (getVida() > getVidaInicial()) {
@@ -36,7 +37,7 @@ public class Mago extends Personaje implements Jugable {
 			setAtaque(FUERZA_SIN_MAGIA);
 		} 
 	}
-	
+
 	@Override
 	public void resetear () {
 		magia = MAGIA;
@@ -53,12 +54,6 @@ public class Mago extends Personaje implements Jugable {
 
 	public void setMagia(int magia) {
 		this.magia = magia;
-	}
-
-	@Override
-	public void curar2() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

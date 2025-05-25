@@ -21,7 +21,7 @@ public class Juego {
 		String enemigoAleatorio = nombreEnemigos[indiceAleatorio];
 		return enemigoAleatorio;
 	}
-	
+
 	public void iniciarJuego (Enemigo enemigo) {
 		
 		if (enemigos.isEmpty()) {
@@ -90,6 +90,10 @@ public class Juego {
 	}
 	public void setRonda(int ronda) {
 		this.ronda = ronda;
+	}
+
+	public ArrayList<Enemigo> getEnemigos() {
+		return enemigos;
 	}
 	
 }

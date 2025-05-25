@@ -15,7 +15,8 @@ public class Programa {
 		Juego nuevoJuego = new Juego ();
 		String seguir = "";
 		int eleccion = 0;
-		int puntuacion = 0;
+		int mayorPuntuacion = 0;
+		int puntuacion;
 		File archivo = new File("MejorPuntuacion.txt");
 		FileWriter fw;
 		
@@ -23,6 +24,7 @@ public class Programa {
 		
 		do {
 		
+		puntuacion = 0;
 		System.out.print("¿Cuantas rondas te gustaria jugar?: ");
 		int rondas = entrada.nextInt();
 		entrada.nextLine();
@@ -38,13 +40,15 @@ public class Programa {
 					Scanner lector = new Scanner(archivo);
 					System.out.println("---Mejor puntuacion---");
 					while (lector.hasNext()) {
-						System.out.println(lector.next());
+						System.out.print(lector.next());
 					}
+					System.out.println();
+					System.out.println("--------------------");
 					lector.close();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} 
 			}
 			
 		System.out.print("¿Qué tipo sera tu personaje? \n"
@@ -84,7 +88,6 @@ public class Programa {
 					System.out.println(enemigoMago.getNombre() + " ataca ");
 					enemigoMago.atacar(jugadorMago);
 					System.out.println("=======================================");
-					puntuacion += 2;
 					
 					if (nuevoJuego.terminarRonda()) {
 						System.out.println("Enemigo derrotado, siguiente ronda...");
@@ -137,7 +140,6 @@ public class Programa {
 					System.out.println(enemigoGuerrero.getNombre() + " ataca ");
 					enemigoGuerrero.atacar(jugadorGuerrero);
 					System.out.println("=======================================");
-					puntuacion += 2;
 					
 					if (nuevoJuego.terminarRonda()) {
 						System.out.println("Enemigo derrotado, siguiente ronda...");
@@ -166,16 +168,21 @@ public class Programa {
 		}	
 		
 		try {
-			int mayorPuntuacion = 0;
-			fw = new FileWriter(archivo);
+			puntuacion = nuevoJuego.getRonda() - 1;
+			Scanner lector = new Scanner(archivo);
+	
+			lector.next();
+			mayorPuntuacion = lector.nextInt();
+			lector.close();
+			
 			if (mayorPuntuacion < puntuacion) {
+				fw = new FileWriter(archivo);
 				mayorPuntuacion = puntuacion;
 				System.out.println("¡" + nombre + " ha conseguido una nueva mejor puntuacion!");
-			}
-			fw.write("Jugador: " + nombre + "\n"
-			+ "Puntuacion: " + mayorPuntuacion + "\n"
-			+ "Rondas jugadas: " + nuevoJuego.getRonda());
-			fw.close();
+				fw.write(nombre + ": " + mayorPuntuacion);
+				fw.close();
+			} 
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

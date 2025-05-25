@@ -13,23 +13,51 @@ public class MagoTest {
 	
 	@BeforeEach
 	public void crearMago() {
-		mago = new Mago("Jaime", 100);
+		mago = new Mago("Jaime", 50);
+		mago.setVidaInicial(100);
+		mago.setMagia(2);
 	}
 	
 	@Test
 	public void magoAtacaOtro() {
-		Mago otro = new Mago("Otro", 100);
-		int vida = otro.getVida();
-		System.out.println(vida);
-		mago.atacar(otro);
-		System.out.println(otro.getVida());
-		assertEquals(otro.getVida(), vida);
+		  Mago defensor = new Mago("Defensor", 100);
+
+		  mago.setAtaque(20);
+		  defensor.setDefensa(5);
+
+		  mago.atacar(defensor);
+
+		  int vidaEsperada = 100 - (20 - 5);
+		  assertEquals(vidaEsperada, defensor.getVida());
+		  assertEquals(mago.getMagia(), 1);
+		  mago.atacar(defensor);
+		  mago.atacar(defensor);
+		  assertEquals(mago.getAtaque(), 5);
+		  
 	}
 	
 	@Test
-	public void morir() {
+	public void magoNoAtaca() {
+	    Mago defensor = new Mago("Defensor", 100);
+
+	    mago.setAtaque(5);
+	    defensor.setDefensa(10);
+
+	    mago.atacar(defensor);
+
+	    assertEquals(100, defensor.getVida()); 
+	    
+	}
+	
+	@Test
+	public void magoMuere() {
 		mago.setVida(0);
 		assertEquals(mago.muerto(), true);
+	}
+	
+	@Test
+	public void magoNoMuere() {
+		assertEquals(mago.muerto(), false);
 	}
 	
 	@Test
@@ -39,40 +67,25 @@ public class MagoTest {
 	
 	@Test
 	public void curarMago() {
-	    mago.setVidaInicial(100);
-	    mago.setVida(50);       
-	    mago.setMagia(1);    
-	    
-	    mago.curar();            
-
-	    assertEquals(70, mago.getVida());
-	    assertEquals(0, mago.getMagia());
+	    mago.curar();
+	    assertEquals(mago.getVida(), 70);
+	    mago.setVida(110);
+		mago.curar();
+		assertEquals(mago.getVida(), 110);
 	}
 
-//
-//    @Test
-//    public void testCurarConMagiaYNoExcedeVidaInicial() {
-//    	mago.setVida(80); // +20 no excede 100
-//    	mago.curar();
-//        assertEquals(100, mago.getVida());
-//        assertEquals(2, mago.getMagia());
-//    }
-//
-//    @Test
-//    public void testCurarConMagiaYExcedeVidaInicial() {
-//    	mago.setVida(95); // +20 excede 100
-//    	mago.curar();
-//        assertEquals(100, mago.getVida());
-//        assertEquals(2, mago.getMagia());
-//    }
-//
-//    @Test
-//    public void testCurarSinMagia() {
-//    	mago.setMagia(0);
-//    	mago.setVida(50);
-//    	mago.curar();
-//        assertEquals(50, mago.getVida());
-//        assertEquals(0, mago.getMagia());
-//    }
+	@Test
+	public void magoNoCuraMagia() {
+		mago.setMagia(0);
+		mago.curar();
+		assertEquals(mago.getVida(), 50);
+	}
+	
+	@Test
+	public void resetear() {
+		mago.setMagia(1);
+		mago.resetear();
+		assertEquals(10, mago.getMagia());
+	}
 	
 }
